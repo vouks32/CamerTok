@@ -55,7 +55,7 @@ const Login = ({ navigation }) => {
       <TextInput
         placeholder="Email"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(text) => setEmail(text.toLocaleLowerCase())}
         style={[styles.input,{borderColor: isValidEmail? "#333" : "#933"}]}
         keyboardType="email-address"
         autoCapitalize="none"

@@ -34,6 +34,7 @@ const AppNavigator = () => {
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: 'bold' }
       }}
+      initialRouteName='Home'
     >
       {user ? (
         // Authenticated screens

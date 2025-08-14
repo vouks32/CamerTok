@@ -53,7 +53,7 @@ const RoleGateway = ({ navigation }) => {
         phone,
         password,
         username,
-        tiktokUser: userType === "creator"? tiktokUser.result : null,
+        tiktokUser: userType === "creator" ? tiktokUser.result : null,
         companyName,
         bank: {
           solde: 0,
@@ -61,7 +61,6 @@ const RoleGateway = ({ navigation }) => {
         }
       };
       await login(credentials);
-      navigation.navigate('Dashboard');
     } catch (error) {
       alert('Authentication failed: ' + error.message);
     }
@@ -152,7 +151,7 @@ const RoleGateway = ({ navigation }) => {
           ref={emailRef}
           placeholder="Email"
           value={email}
-          onChangeText={setEmail}
+          onChangeText={(text) => setEmail(text.toLocaleLowerCase())}
           style={styles.input}
           keyboardType="email-address"
           autoCapitalize="none"
@@ -176,7 +175,7 @@ const RoleGateway = ({ navigation }) => {
 
         <Button
           title={userType === 'creator' ? "Create Creator Account" : "Create Business Account"}
-          onPress={()=>handleSubmit()}
+          onPress={() => handleSubmit()}
           color="#FF0050"
         />
 
