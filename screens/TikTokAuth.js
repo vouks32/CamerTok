@@ -21,7 +21,7 @@ const openInSystemBrowser = async (url) => {
 
 export default function TikTokAuth({ onLogin, navigation }) {
   const { user } = useAuth()
-  const REDIRECT_URI = 'https://campay-api.vercel.app/api/auth?email='
+  const REDIRECT_URI = 'https://campay-api.vercel.app/api/auth?email=' //J'utilise vercel pour valider tiktok parceque AWS n'offre pas de https
 
   const promptAsync = () => {
     openInSystemBrowser(REDIRECT_URI + user.email);

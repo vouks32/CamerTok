@@ -5,7 +5,7 @@ import { Alert } from 'react-native';
 
 const AuthContext = createContext();
 
-const baseUrl = 'http://10.32.201.101'
+const baseUrl = 'http://16.170.236.54' // URL du serveur AWS
 
 const tiktokURL = baseUrl + '/api/tiktok/info';
 const UserUrl = baseUrl + '/api/users';
