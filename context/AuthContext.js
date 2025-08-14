@@ -145,8 +145,6 @@ export const AuthProvider = ({ children }) => {
             return
           }
           let userJSON = JSON.parse(userData);
-          userJSON.userType = "business"
-          userJSON.companyName = "Boi SARL"
           await AsyncStorage.setItem('lastLogin', Date.now().toString());
           setUser(userJSON);
         } else {
@@ -185,8 +183,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    setUser(null);
+    setIsLoading(true)
     await AsyncStorage.removeItem('user');
+    setUser(null);
+    setIsLoading(false)
+
   };
 
 

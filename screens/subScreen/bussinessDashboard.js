@@ -85,7 +85,7 @@ const BussinessDashboard = ({ route, navigation }) => {
     return (
         <View style={styles.container}>
 
-            {user.userType === 'business' && (
+            {user && user.userType === 'business' && (
                 <View style={styles.statsContainer}>
                     <Text style={styles.statsText}>Total Views: 0</Text>
                     <Text style={styles.statsText}>Active Campaigns: 0</Text>
@@ -103,7 +103,7 @@ const BussinessDashboard = ({ route, navigation }) => {
                             <View>
                                 <CampaignCard
                                     campaign={item}
-                                    userType={user.userType}
+                                    userType={user?.userType}
                                     navigation={navigation}
                                 />
                             </View>
@@ -132,7 +132,7 @@ const BussinessDashboard = ({ route, navigation }) => {
                             <View>
                                 <CampaignCard
                                     campaign={item}
-                                    userType={user.userType}
+                                    userType={user?.userType}
                                     navigation={navigation}
                                 />
                             </View>
@@ -154,7 +154,7 @@ const BussinessDashboard = ({ route, navigation }) => {
 
 
 
-            {user.userType === 'business' && (
+            {user && user.userType === 'business' && (
                 <TouchableOpacity
                     title=""
                     onPress={() => navigation.navigate('CampaignHub', { mode: 'create' })}

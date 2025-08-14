@@ -24,7 +24,7 @@ const Dashboard = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       
-      {user.userType === 'creator'
+      {user && user.userType === 'creator'
         ? <CreatorDashboard route={route} navigation={navigation} />
         : <BussinessDashboard route={route} navigation={navigation} />
       }

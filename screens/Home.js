@@ -24,14 +24,13 @@ const Home = ({ route, navigation }) => {
   useEffect(() => {
     // Replace with API call to fetch campaigns
     setCampaigns(allCampaigns);
-    console.log(user.userType);
   }, []);
 
 
   return (
     <View style={styles.container}>
       
-      {user.userType === 'creator'
+      {user && user.userType === 'creator'
         ? <CreatorDashboard route={route} navigation={navigation} />
         : <BusinessHome navigation={navigation} />
       }

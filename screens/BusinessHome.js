@@ -18,10 +18,10 @@ const BusinessHome = ({ navigation }) => {
   useEffect(() => {
     if (allUsers?.docs) {
 
-      const creators = allUsers.docs.filter(user =>
-        user.userType === 'creator' &&
-        (user.tiktokUser?.user.nickname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          user.tiktokUser?.user.username?.toLowerCase().includes(searchQuery.toLowerCase())
+      const creators = allUsers.docs.filter(_user =>
+        _user.userType === 'creator' &&
+        (_user.tiktokUser?.user?.nickname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          _user.tiktokUser?.user?.username?.toLowerCase().includes(searchQuery.toLowerCase())
         ));
 
       setFilteredCreators(creators);
@@ -57,7 +57,7 @@ const BusinessHome = ({ navigation }) => {
               Bienvenue,
             </Text>
             <Text style={styles.welcomeText}>
-              {user.companyName || user.email}
+              {user?.companyName || user?.email}
             </Text>
             <Text style={[styles.subHeader, { width: '50%', fontSize: 12 }]}>
               Gérez vos collaborations avec les créateurs de contenu
@@ -67,7 +67,7 @@ const BusinessHome = ({ navigation }) => {
         </View>
 
         <View style={{ paddingHorizontal: 20 }}>
-          {allCampaigns?.docs?.some(_c => _c.campaignOwner === user.email) ?
+          {allCampaigns?.docs?.some(_c => _c.campaignOwner === user?.email) ?
             <View style={styles.quickActions}>
               <Text style={[styles.sectionTitle, { textAlign: 'center' }]}>Collaboration équitable avec Kolabo</Text>
               <View style={[styles.actionRow, { justifyContent: "space-evenly" }]}>
@@ -77,7 +77,7 @@ const BusinessHome = ({ navigation }) => {
                 >
                   <Ionicons name="megaphone" size={24} color="#FF0050" />
                   <Text style={styles.actionText}>{'Mes Campagnes'}</Text>
-                  <Text style={[styles.actionText, { color: "#999" }]}>{allCampaigns.docs.filter(_c => _c.campaignOwner === user.email && _c.status === "active").length} en cours • {allCampaigns.docs.filter(_c => _c.campaignOwner === user.email && _c.status === "review").length} en attente</Text>
+                  <Text style={[styles.actionText, { color: "#999" }]}>{allCampaigns.docs.filter(_c => _c.campaignOwner === user?.email && _c.status === "active").length} en cours • {allCampaigns.docs.filter(_c => _c.campaignOwner === user?.email && _c.status === "review").length} en attente</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -86,7 +86,7 @@ const BusinessHome = ({ navigation }) => {
                 >
                   <Ionicons name="person-circle" size={24} color="#FF0050" />
                   <Text style={styles.actionText}>Mon profil</Text>
-                  <Text style={[styles.actionText, { color: "#999" }]}>solde : {user.bank?.solde || 0} FCFA</Text>
+                  <Text style={[styles.actionText, { color: "#999" }]}>solde : {user?.bank?.solde || 0} FCFA</Text>
 
                 </TouchableOpacity>
               </View>
@@ -172,15 +172,15 @@ const BusinessHome = ({ navigation }) => {
                     onPress={() => toggleCreatorSelection(item)}
                   >
                     <Image
-                      source={{ uri: item.tiktokUser?.user.avatarThumb || 'https://via.placeholder.com/60' }}
+                      source={{ uri: item.tiktokUser?.user?.avatarThumb || 'https://via.placeholder.com/60' }}
                       style={styles.creatorAvatar}
                     />
                     <View style={styles.creatorInfo}>
                       <Text style={styles.creatorName}>
-                        {item.tiktokUser?.user.nickname || 'Créateur inconnu'}
+                        {item.tiktokUser?.user?.nickname || 'Créateur inconnu'}
                       </Text>
                       <Text style={styles.creatorUsername}>
-                        @{item.tiktokUser?.user.username || 'non disponible'}
+                        @{item.tiktokUser?.user?.username || 'non disponible'}
                       </Text>
                       <Text style={styles.creatorStats}>
                         {item.tiktokUser?.stats?.followerCount
