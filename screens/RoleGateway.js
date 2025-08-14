@@ -32,7 +32,7 @@ const RoleGateway = ({ navigation }) => {
       Alert.alert("Please, enter all necessary informations")
       return
     }
-    if (!tiktokUser.isSelected) {
+    if (userType === "creator" && !tiktokUser.isSelected) {
       Alert.alert("Aucun Compte choisis", "Veillez cliquer sur le compte tiktok qui apparait")
       return
     }
@@ -53,14 +53,13 @@ const RoleGateway = ({ navigation }) => {
         phone,
         password,
         username,
-        tiktokUser: tiktokUser.result,
+        tiktokUser: userType === "creator"? tiktokUser.result : null,
         companyName,
         bank: {
           solde: 0,
           transactions: []
         }
       };
-
       await login(credentials);
       navigation.navigate('Dashboard');
     } catch (error) {
@@ -177,7 +176,7 @@ const RoleGateway = ({ navigation }) => {
 
         <Button
           title={userType === 'creator' ? "Create Creator Account" : "Create Business Account"}
-          onPress={handleSubmit}
+          onPress={()=>handleSubmit()}
           color="#FF0050"
         />
 

@@ -136,7 +136,7 @@ export const AuthProvider = ({ children }) => {
         await loadCampaigns();
         const userData = await AsyncStorage.getItem('user');
         const userLastLogin = await AsyncStorage.getItem('lastLogin');
-        const allUsersResponse = await AuthAPI({ email: "@all" });
+        const allUsersResponse = await GetAllusersAPI();
         setAllUsers(allUsersResponse)
 
         if (userData) {
@@ -213,6 +213,21 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+const GetAllusersAPI = async () => {
+  const user_response = await fetch(`${UserUrl}?email=@all`, {
+    headers: {
+      "skip_zrok_interstitial": "true"
+    }
+  });
+
+  if (user_response.status === 404) {
+    return { docs: [], size: 0 }
+  } else {
+    const newUser = await user_response.json();
+    return newUser
+  }
+}
+
 // Fake authentication for development
 const AuthAPI = async (user, login = false) => {
   try {
@@ -226,32 +241,39 @@ const AuthAPI = async (user, login = false) => {
     });
 
     if (user_response.status === 404 && !login) {
-      // Créer un nouveau joueur
-      const createResponse = await fetch(UserUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "skip_zrok_interstitial": "true"
-        },
-        body: JSON.stringify({
-          ...user,
-          createdAt: new Date().toISOString(),
-          lastLogin: new Date().toISOString(),
-          isFirstTime: true
-        })
-      });
 
-      const newUser = await createResponse.json();
-      return newUser
-    } else if (user_response.status === 404) {
-      return { error: true, message: "l'adresse mail ne correspond pas, si vous n'avez pas de compte, créez en un" }
-    } else {
-      // Mettre à jour le joueur existant
-      const newUser = await user_response.json();
-      if (newUser.password !== user.password) {
-        return { error: true, message: "le mot de passe ne correspond pas" }
+      if (!login) {
+        // Créer un nouveau joueur
+        const createResponse = await fetch(UserUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            "skip_zrok_interstitial": "true"
+          },
+          body: JSON.stringify({
+            ...user,
+            createdAt: new Date().toISOString(),
+            lastLogin: new Date().toISOString(),
+            isFirstTime: true
+          })
+        });
+
+        const newUser = await createResponse.json();
+        return newUser
+      } else {
+        return { error: true, message: "l'adresse mail ne correspond pas, si vous n'avez pas de compte, créez en un" }
       }
-      return newUser;
+    } else {
+      if (login) {
+        // Mettre à jour le joueur existant
+        const newUser = await user_response.json();
+        if (newUser.password !== user.password) {
+          return { error: true, message: "le mot de passe ne correspond pas" }
+        }
+        return newUser;
+      } else {
+        return { error: true, message: "Ce compte existe déjà, connectez vous plutôt" }
+      }
     }
   } catch (error) {
     console.error('Error initializing player:', error);

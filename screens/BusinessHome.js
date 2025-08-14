@@ -8,7 +8,7 @@ import heroImage from '../assets/images/hero-side.png'
 import { ScrollView } from 'react-native-gesture-handler';
 
 const BusinessHome = ({ navigation }) => {
-  const { user, allUsers, allCampaigns } = useAuth();
+  const { user, allUsers, allCampaigns, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredCreators, setFilteredCreators] = useState([]);
   const [selectedCreators, setSelectedCreators] = useState([]);
@@ -48,7 +48,7 @@ const BusinessHome = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+    <KeyboardAvoidingView behavior="height" style={styles.container}>
       <ScrollView>
         {/* Header */}
         <View style={[styles.header, { borderBottomLeftRadius: 35, borderBottomRightRadius: 35, overflow: "hidden" }]}>
@@ -62,6 +62,8 @@ const BusinessHome = ({ navigation }) => {
             <Text style={[styles.subHeader, { width: '50%', fontSize: 12 }]}>
               Gérez vos collaborations avec les créateurs de contenu
             </Text>
+              <TouchableOpacity onPress={logout} style={[styles.Button, {paddingHorizontal : 10, marginHorizontal : 0, width : "20%"}]}><Text style={[styles.ButtonText, {fontSize : 12}]}>Log OUT !</Text></TouchableOpacity>
+            
           </ImageBackground>
 
         </View>
@@ -159,7 +161,7 @@ const BusinessHome = ({ navigation }) => {
               </Text>
             )}
             {
-              loadingCreators ? (
+              loadingCreators && filteredCreators.length == 0 ? (
                 <ActivityIndicator size="small" color="#FF0050" />
               ) : (
                 filteredCreators.map(item => (
