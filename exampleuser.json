@@ -1,0 +1,78 @@
+{
+    "campaigns": [],
+    "companyName": "",
+    "createdAt": "2025-08-03T08:47:06.498Z",
+    "email": "jotsaange@gmail.com",
+    "isFirstTime": true,
+    "lastLogin": "2025-08-03T08:47:06.498Z",
+    "lastUpdated": 1754210825759,
+    "password": "1234",
+    "phone": "676073559",
+    "userType": "creator",
+    "username": "vouks.san",
+    "tiktokUser": {
+        "stats": {
+            "followerCount": 31500,
+            "followingCount": 350,
+            "friendCount": 128,
+            "heartCount": 1200000,
+            "likeCount": 19500,
+            "videoCount": 153
+        },
+        "user": {
+            "avatarLarger": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=d80c1bd1&x-expires=1754380800&x-signature=KPJkp2LQ1IUEr1VNC7nc9AWnHOY%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+            "avatarMedium": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:720:720.jpeg?dr=14579&refresh_token=180ba3a4&x-expires=1754380800&x-signature=WzZ6OQ%2FJUT2jy0yyLF7i8k3MnqI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+            "avatarThumb": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:100:100.jpeg?dr=14579&refresh_token=272eefaa&x-expires=1754380800&x-signature=Y7fWgZ9r0fd4YBtRmDp46%2FRc8%2FI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+            "commerceUser": false,
+            "nickname": "Dr. Vouks",
+            "nicknameModifyTime": 1746563508,
+            "privateAccount": false,
+            "secUid": "MS4wLjABAAAAQZzjGLPdTiEgtD1TSY3FXPbSsAvYzWyyzkkZgFd_7E1oqnJNa46XeTe-FH89bfEH",
+            "signature": "『gV』je s'appelle vouks pour collaboration 🫵👇peanutsxonr@gmail.com",
+            "uid": "7090270909333013509",
+            "username": "vouks.san",
+            "usernameModifyTime": 0,
+            "verified": false
+        }
+    }
+}
+
+{
+    "campaigns": [],
+    "companyName": "",
+    "createdAt": "2025-08-03T08:47:06.498Z",
+    "email": "user04@gmail.com",
+    "id": "user04@gmail.com",
+    "isFirstTime": true,
+    "lastLogin": "2025-08-03T08:47:06.498Z",
+    "lastUpdated": 1754210825759,
+    "password": "1234",
+    "phone": "676073559",
+    "tiktokUser": {
+        "stats": {
+            "followerCount": 78500,
+            "followingCount": 350,
+            "friendCount": 128,
+            "heartCount": 900000,
+            "likeCount": 19500,
+            "videoCount": 153
+        },
+        "user": {
+            "avatarLarger": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=d80c1bd1&x-expires=1754380800&x-signature=KPJkp2LQ1IUEr1VNC7nc9AWnHOY%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+            "avatarMedium": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:720:720.jpeg?dr=14579&refresh_token=180ba3a4&x-expires=1754380800&x-signature=WzZ6OQ%2FJUT2jy0yyLF7i8k3MnqI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+            "avatarThumb": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:100:100.jpeg?dr=14579&refresh_token=272eefaa&x-expires=1754380800&x-signature=Y7fWgZ9r0fd4YBtRmDp46%2FRc8%2FI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+            "commerceUser": false,
+            "nickname": "Dr. ggrrr",
+            "nicknameModifyTime": 1746563508,
+            "privateAccount": false,
+            "secUid": "MS4wLjABAAAAQZzjGLPdTiEgtD1TSY3FXPbSsAvYzWyyzkkZgFd_7E1oqnJNa46XeTe-FH89bfEH",
+            "signature": "『gV』je s'appelle vouks pour collaboration 🫵👇peanutsxonr@gmail.com",
+            "uid": "7090270909333013509",
+            "username": "vouks.rt",
+            "usernameModifyTime": 0,
+            "verified": false
+        }
+    },
+    "userType": "creator",
+    "username": "vouks.rt"
+}
