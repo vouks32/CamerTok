@@ -9,6 +9,9 @@ import Dashboard from '../screens/Dashboard';
 import CampaignHub from '../screens/CampaignHub';
 import Home from '../screens/Home';
 import TikTokAuth from '../screens/TikTokAuth';
+import BrowseCampaigns from '../screens/BrowseCampaigns';
+import Profile from '../screens/Profile';
+import NotificationCenter from '../screens/NotificationCenter';
 
 const Stack = createStackNavigator();
 
@@ -63,6 +66,21 @@ const AppNavigator = () => {
                   ? 'Apply to Campaign'
                   : 'Campaign Details'
             })}
+          />
+          <Stack.Screen
+            name="BrowseCampaigns"
+            component={BrowseCampaigns}
+            options={{ title: 'Parcourir les campagnes' }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={Profile}
+            options={{ title: 'Profil' }}
+          />
+          <Stack.Screen
+            name="NotificationCenter"
+            component={NotificationCenter}
+            options={{ title: 'Notifications' }}
           />
         </>
       ) : (

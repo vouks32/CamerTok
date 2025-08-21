@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { useAuth } from '../context/AuthContext';
-import CreatorDashboard from './subScreen/creatorDashboard';
+import CreatorHome from './CreatorHome';
 import BusinessHome from './BusinessHome';
 
 
@@ -31,7 +31,7 @@ const Home = ({ route, navigation }) => {
     <View style={styles.container}>
       
       {user && user.userType === 'creator'
-        ? <CreatorDashboard route={route} navigation={navigation} />
+        ? <CreatorHome navigation={navigation} />
         : <BusinessHome navigation={navigation} />
       }
 

@@ -5,7 +5,7 @@ import { Alert } from 'react-native';
 
 const AuthContext = createContext();
 
-const baseUrl = 'http://192.168.1.139:3001' // URL du serveur local pour test
+const baseUrl = 'http://192.168.1.106:3001' // URL du serveur local pour test
 
 const tiktokURL = baseUrl + '/api/tiktok/info';
 const UserUrl = baseUrl + '/api/users';
