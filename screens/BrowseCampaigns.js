@@ -19,9 +19,7 @@ const BrowseCampaigns = ({ navigation }) => {
     // Get campaigns where this creator is not yet participating
     const available = allCampaigns.docs.filter(campaign => 
       campaign.status === 'active' && 
-      !campaign.campaignCreatorsAndBudget?.limitParticipatingCreator?.creators?.some(
-        creator => creator.email === user.email
-      )
+      !campaign.evolution?.participatingCreators?.find(c => c.creator.email === user.email)
     );
 
     setAvailableCampaigns(available);

@@ -12,6 +12,7 @@ import TikTokAuth from '../screens/TikTokAuth';
 import BrowseCampaigns from '../screens/BrowseCampaigns';
 import Profile from '../screens/Profile';
 import NotificationCenter from '../screens/NotificationCenter';
+import NotificationScreen from '../screens/Notifications';
 
 const Stack = createStackNavigator();
 
@@ -37,11 +38,17 @@ const AppNavigator = () => {
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: 'bold' }
       }}
-      initialRouteName='Home'
     >
       {user ? (
         // Authenticated screens
         <>
+          {user.userType === "creator" && (
+            <Stack.Screen
+              name="TiktokLogin"
+              component={TikTokAuth}
+              options={{ headerShown: false }}
+            />
+          )}
           <Stack.Screen
             name="Home"
             component={Home}
@@ -51,20 +58,17 @@ const AppNavigator = () => {
             name="Dashboard"
             component={Dashboard}
           />
-
-          <Stack.Screen name="TiktokLogin">
-            {() => <TikTokAuth onLogin={handleLogin} />}
-          </Stack.Screen>
-
           <Stack.Screen
             name="CampaignHub"
             component={CampaignHub}
             options={({ route }) => ({
               title: route.params.mode === 'create'
-                ? 'Create Campaign'
-                : route.params.mode === 'apply'
-                  ? 'Apply to Campaign'
-                  : 'Campaign Details'
+                ? 'Créer une campagne'
+                : route.params.mode === 'edit'
+                  ? 'Modifier une campagne'
+                  : route.params.mode === 'stats'
+                  ? 'Statistiques de la campagne'
+                  : 'Détails de la campagne'
             })}
           />
           <Stack.Screen

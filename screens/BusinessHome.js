@@ -1,6 +1,6 @@
 // screens/business/BusinessHomeScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput, Image, ImageBackground, KeyboardAvoidingView, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput, Image, ImageBackground, KeyboardAvoidingView, ActivityIndicator, Alert, Dimensions } from 'react-native';
 import { useAuth } from '../context/AuthContext';
 import { Ionicons } from '@expo/vector-icons';
 import { SubScreenStyles } from './subScreen/SubScreenStyles'
@@ -36,26 +36,25 @@ const BusinessHome = ({ navigation }) => {
 
       // Follower count filter
       if (activeFilters.followers !== 'all') {
-        const followerCount = _user.tiktokUser?.stats?.followerCount || 0;
         switch (activeFilters.followers) {
           case 'micro':
-            creators = creators.filter(_user => followerCount < 10000);
+            creators = creators.filter(_user => _user.tiktokUser?.stats?.followerCount < 10000);
             break;
           case 'small':
-            creators = creators.filter(_user => followerCount >= 10000 && followerCount < 50000);
+            creators = creators.filter(_user => _user.tiktokUser?.stats?.followerCount >= 10000 && _user.tiktokUser?.stats?.followerCount < 50000);
             break;
           case 'medium':
-            creators = creators.filter(_user => followerCount >= 50000 && followerCount < 100000);
+            creators = creators.filter(_user => _user.tiktokUser?.stats?.followerCount >= 50000 && _user.tiktokUser?.stats?.followerCount < 100000);
             break;
           case 'large':
-            creators = creators.filter(_user => followerCount >= 100000);
+            creators = creators.filter(_user => _user.tiktokUser?.stats?.followerCount >= 100000);
             break;
         }
       }
 
       // Engagement rate filter
       if (activeFilters.engagement !== 'all') {
-        const engagementRate = _user.tiktokUser?.stats?.engagementRate || 0;
+        const engagementRate = user.tiktokUser?.stats?.engagementRate || 0;
         switch (activeFilters.engagement) {
           case 'low':
             creators = creators.filter(_user => engagementRate < 2);
@@ -117,11 +116,11 @@ const BusinessHome = ({ navigation }) => {
     const activeCampaigns = allCampaigns?.docs?.filter(_c => _c.campaignOwner === user?.email && _c.status === "active").length || 0;
     const pendingCampaigns = allCampaigns?.docs?.filter(_c => _c.campaignOwner === user?.email && _c.status === "review").length || 0;
     const totalCampaigns = allCampaigns?.docs?.filter(_c => _c.campaignOwner === user?.email).length || 0;
-    
+
     if (totalCampaigns === 0) {
       return "Prêt à lancer votre première campagne ? Découvrez nos créateurs talentueux et commencez votre collaboration dès aujourd'hui.";
     }
-    
+
     return `${activeCampaigns} campagne${activeCampaigns > 1 ? 's' : ''} active${activeCampaigns > 1 ? 's' : ''}, ${pendingCampaigns} en attente • Solde: ${user?.bank?.solde || 0} FCFA`;
   };
 
@@ -153,7 +152,10 @@ const BusinessHome = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView behavior="height" style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{
+        maxHeight: Dimensions.get('window').height,
+        paddingBottom : 30
+      }}>
         {/* Enhanced Header */}
         <View style={[styles.header, { borderBottomLeftRadius: 35, borderBottomRightRadius: 35, overflow: "hidden" }]}>
           <ImageBackground source={heroImage} style={{ padding: 20, paddingVertical: 60 }}>
@@ -169,10 +171,10 @@ const BusinessHome = ({ navigation }) => {
                   {getCompanySummary()}
                 </Text>
               </View>
-              
+
               <View style={styles.headerActions}>
-                <TouchableOpacity 
-                  onPress={logout} 
+                <TouchableOpacity
+                  onPress={logout}
                   style={styles.logoutButton}
                 >
                   <Ionicons name="log-out-outline" size={20} color="#FF0050" />
@@ -186,7 +188,6 @@ const BusinessHome = ({ navigation }) => {
         <View style={{ paddingHorizontal: 20 }}>
           {/* Enhanced Quick Actions */}
           <View style={styles.quickActions}>
-            <Text style={styles.sectionTitle}>Actions rapides</Text>
             <View style={styles.actionGrid}>
               <TouchableOpacity
                 style={styles.actionCard}
@@ -225,18 +226,6 @@ const BusinessHome = ({ navigation }) => {
                 <Text style={styles.actionSubtext}>Voir les alertes</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.actionCard}
-                onPress={() => setShowFilters(!showFilters)}
-              >
-                <View style={styles.actionIconContainer}>
-                  <Ionicons name="filter" size={24} color="#FF0050" />
-                </View>
-                <Text style={styles.actionText}>Filtres</Text>
-                <Text style={styles.actionSubtext}>
-                  {Object.values(activeFilters).filter(f => f !== 'all').length} actifs
-                </Text>
-              </TouchableOpacity>
             </View>
           </View>
 
@@ -297,21 +286,32 @@ const BusinessHome = ({ navigation }) => {
                 {filteredCreators.length} résultat{filteredCreators.length > 1 ? 's' : ''}
               </Text>
             </View>
-            
-            <View style={styles.searchBox}>
-              <Ionicons name="search" size={20} color="#aaa" />
-              <TextInput
-                placeholder="Rechercher par nom, pseudo ou bio..."
-                value={searchQuery}
-                onChangeText={setSearchQuery}
-                style={styles.searchInput}
-                placeholderTextColor="#aaa"
-              />
-              {searchQuery.length > 0 && (
-                <TouchableOpacity onPress={() => setSearchQuery('')}>
-                  <Ionicons name="close-circle" size={20} color="#aaa" />
-                </TouchableOpacity>
-              )}
+
+            { /** recherche button */}
+            <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
+              <View style={styles.searchBox}>
+                <Ionicons name="search" size={20} color="#aaa" />
+                <TextInput
+                  placeholder="Rechercher par nom, pseudo ou bio..."
+                  value={searchQuery}
+                  onChangeText={setSearchQuery}
+                  style={styles.searchInput}
+                  placeholderTextColor="#aaa"
+                />
+                {searchQuery.length > 0 && (
+                  <TouchableOpacity onPress={() => setSearchQuery('')}>
+                    <Ionicons name="close-circle" size={20} color="#aaa" />
+                  </TouchableOpacity>
+                )}
+              </View>
+              <TouchableOpacity
+                style={{ paddingLeft: 10 }}
+                onPress={() => setShowFilters(!showFilters)}
+              >
+                <View style={[styles.actionIconContainer, { marginBottom: 0 }]}>
+                  <Ionicons name="filter" size={24} color="#FF0050" />
+                </View>
+              </TouchableOpacity>
             </View>
 
             {/* Advanced Filters */}
@@ -328,8 +328,8 @@ const BusinessHome = ({ navigation }) => {
                     { value: 'large', label: '> 100k' }
                   ]}
                 />
-                
-                <FilterButton
+
+                {/* <FilterButton
                   label="Taux d'engagement"
                   value="engagement"
                   options={[
@@ -338,7 +338,7 @@ const BusinessHome = ({ navigation }) => {
                     { value: 'medium', label: '2-5%' },
                     { value: 'high', label: '> 5%' }
                   ]}
-                />
+                />*/}
               </View>
             )}
           </View>
@@ -354,13 +354,13 @@ const BusinessHome = ({ navigation }) => {
               <View style={styles.emptyContainer}>
                 <Ionicons name="search-outline" size={48} color="#666" />
                 <Text style={styles.emptyText}>
-                  {searchQuery || Object.values(activeFilters).some(f => f !== 'all') 
+                  {searchQuery || Object.values(activeFilters).some(f => f !== 'all')
                     ? 'Aucun créateur ne correspond à vos critères'
                     : 'Aucun créateur disponible pour le moment'
                   }
                 </Text>
                 {(searchQuery || Object.values(activeFilters).some(f => f !== 'all')) && (
-                  <TouchableOpacity 
+                  <TouchableOpacity
                     style={styles.clearFiltersButton}
                     onPress={() => {
                       setSearchQuery('');
@@ -372,11 +372,10 @@ const BusinessHome = ({ navigation }) => {
                 )}
               </View>
             ) : (
-              <FlatList
-                data={filteredCreators}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
+              <ScrollView style={styles.creatorList}>{
+                filteredCreators.map((item => (
                   <TouchableOpacity
+                    key={item.id}
                     style={[
                       styles.creatorCard,
                       selectedCreators.some(c => c.id === item.id) && styles.selectedCreator
@@ -384,27 +383,27 @@ const BusinessHome = ({ navigation }) => {
                     onPress={() => toggleCreatorSelection(item)}
                   >
                     <Image
-                      source={{ 
-                        uri: item.tiktokUser?.user?.avatarThumb || 'https://via.placeholder.com/60' 
+                      source={{
+                        uri: item.tiktokUser?.avatar_url_100 || 'https://via.placeholder.com/60'
                       }}
                       style={styles.creatorAvatar}
                     />
                     <View style={styles.creatorInfo}>
                       <Text style={styles.creatorName}>
-                        {item.tiktokUser?.user?.nickname || 'Créateur inconnu'}
+                        {item.tiktokUser?.display_name || 'Créateur inconnu'}
                       </Text>
                       <Text style={styles.creatorUsername}>
-                        @{item.tiktokUser?.user?.username || 'non disponible'}
+                        @{item.tiktokUser?.username || 'non disponible'}
                       </Text>
                       <View style={styles.creatorStats}>
                         <Text style={styles.creatorStatsText}>
-                          {item.tiktokUser?.stats?.followerCount
-                            ? `${Math.floor(item.tiktokUser.stats.followerCount / 1000)}k abonnés`
-                            : 'Abonnés non disponibles'}
+                          {item.tiktokUser?.follower_count
+                            ? `${(item.tiktokUser.follower_count / 1000).toFixed(1)}k abonnés `
+                            : 'Abonnés non disponibles '}
                         </Text>
-                        {item.tiktokUser?.stats?.engagementRate && (
+                        {item.tiktokUser?.likes_count && (
                           <Text style={styles.engagementText}>
-                            • {item.tiktokUser.stats.engagementRate}% engagement
+                            • {(item.tiktokUser.likes_count > 999999 ? item.tiktokUser.likes_count / 1000000 : item.tiktokUser.likes_count / 1000).toFixed(1).toLocaleString('en-GB') + (item.tiktokUser.likes_count > 999999 ? 'M' : 'K')} Likes
                           </Text>
                         )}
                       </View>
@@ -421,7 +420,7 @@ const BusinessHome = ({ navigation }) => {
                         size={24}
                         color="#FF0050"
                       />
-                      <TouchableOpacity 
+                      <TouchableOpacity
                         style={styles.viewProfileButton}
                         onPress={() => {
                           // Navigate to creator profile view
@@ -432,10 +431,8 @@ const BusinessHome = ({ navigation }) => {
                       </TouchableOpacity>
                     </View>
                   </TouchableOpacity>
-                )}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.creatorList}
-              />
+                )))
+              }</ScrollView>
             )}
           </View>
         </View>
@@ -470,9 +467,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   companySummary: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#ccc',
-    lineHeight: 20,
     maxWidth: '80%',
   },
   headerActions: {
@@ -500,7 +496,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   quickActions: {
-    marginBottom: 25,
+    marginBottom: 10,
   },
   actionGrid: {
     flexDirection: 'row',
@@ -513,7 +509,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 20,
     alignItems: 'center',
-    width: '48%',
+    width: '32%',
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#333',
@@ -529,14 +525,14 @@ const styles = StyleSheet.create({
   },
   actionText: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 4,
   },
   actionSubtext: {
     color: '#999',
-    fontSize: 12,
+    fontSize: 10,
     textAlign: 'center',
   },
   campaignOptions: {
@@ -584,9 +580,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#222',
     borderRadius: 15,
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
     borderWidth: 1,
     borderColor: '#333',
+    flex: 1
   },
   searchInput: {
     flex: 1,
@@ -594,9 +592,20 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
   },
+  filterButton: {
+    backgroundColor: '#222',
+    borderRadius: 15,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 0,
+    borderWidth: 1,
+    borderColor: '#333',
+  },
   filtersContainer: {
     marginTop: 15,
     padding: 15,
+    paddingBottom: 0,
     backgroundColor: '#1a1a1a',
     borderRadius: 15,
     borderWidth: 1,

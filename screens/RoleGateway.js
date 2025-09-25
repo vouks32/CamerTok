@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, KeyboardAvoidingView, Image, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, TextInput, Button, Text, StyleSheet, KeyboardAvoidingView, Image, TouchableOpacity, ActivityIndicator, Alert, Linking } from 'react-native';
 import { useAuth, TiktokUsernameSearch } from '../context/AuthContext';
 
 const validateEmail = (email) => {
@@ -24,7 +24,8 @@ const RoleGateway = ({ navigation }) => {
   const [tiktokUser, setTiktokUser] = useState(null);
   const emailRef = useRef(null);
 
-  const { login } = useAuth();
+  const { login, reloadUser, baseUrl } = useAuth();
+  const REDIRECT_URI = baseUrl + '/api/auth?email=' //J'utilise vercel pour valider tiktok parceque AWS n'offre pas de https
 
   const handleSubmit = async () => {
 
@@ -32,10 +33,10 @@ const RoleGateway = ({ navigation }) => {
       Alert.alert("Please, enter all necessary informations")
       return
     }
-    if (userType === "creator" && !tiktokUser.isSelected) {
+    /*if (userType === "creator" && !tiktokUser.isSelected) {
       Alert.alert("Aucun Compte choisis", "Veillez cliquer sur le compte tiktok qui apparait")
       return
-    }
+    }*/
     if ((validateEmail(email) == null || email.split('.')[email.split('.').length - 1].length >= 4)) {
       Alert.alert("Adresse Mail Incorrect", "Entrez une adresse mail correcte")
       return
@@ -53,7 +54,7 @@ const RoleGateway = ({ navigation }) => {
         phone,
         password,
         username,
-        tiktokUser: userType === "creator" ? tiktokUser.result : null,
+        tiktokUser: null,
         companyName,
         bank: {
           solde: 0,
@@ -61,10 +62,30 @@ const RoleGateway = ({ navigation }) => {
         }
       };
       await login(credentials);
+      if(userType === "creator")
+      await Linking.openURL(REDIRECT_URI + email);
     } catch (error) {
       alert('Authentication failed: ' + error.message);
     }
   };
+
+
+  const handleDeepLink = async (event) => {
+    // Parse redirect URL
+    // with the setInterval this is not needed
+    const url = Linking.parse(event.url);
+    if (url.path === 'TiktokLogin') {
+      //await reloadUser()
+    }
+  };
+
+  useEffect(() => {
+    // Add deep link listener
+    const sub = Linking?.addEventListener('url', handleDeepLink);
+    // Clean up listener
+    return () => sub.remove()
+  }, []);
+
 
   const TiktokUsernameFetch = async (text) => {
     setUsername(text)
@@ -109,7 +130,7 @@ const RoleGateway = ({ navigation }) => {
         </View>
 
 
-        {userType === 'creator' && (
+        {userType === 'creatorxxx' && (
           <TextInput
             placeholder="@tiktok_username"
             value={username}

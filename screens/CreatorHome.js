@@ -1,13 +1,15 @@
 // screens/creator/CreatorHomeScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, ImageBackground, ScrollView, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, ImageBackground, ScrollView, ActivityIndicator, Alert, Modal, Dimensions } from 'react-native';
 import { useAuth } from '../context/AuthContext';
 import { Ionicons } from '@expo/vector-icons';
 import { SubScreenStyles } from './subScreen/SubScreenStyles'
 import heroImage from '../assets/images/hero-side.png'
 
+const {width, height} = Dimensions.get('window')
+
 const CreatorHome = ({ navigation }) => {
-  const { user, allUsers, allCampaigns, logout } = useAuth();
+  const { user, UpdateCampaign, isLoading, allCampaigns, baseUrl } = useAuth();
   const [recommendedCampaigns, setRecommendedCampaigns] = useState([]);
   const [myCampaigns, setMyCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,16 +29,17 @@ const CreatorHome = ({ navigation }) => {
     if (!allCampaigns?.docs || !user) return;
 
     // Get campaigns where this creator is participating
-    const creatorCampaigns = allCampaigns.docs.filter(campaign => 
-      campaign.campaignCreatorsAndBudget?.limitParticipatingCreator?.creators?.some(
-        creator => creator.email === user.email
-      )
+    const creatorCampaigns = allCampaigns.docs.filter(campaign =>
+      campaign.evolution?.participatingCreators?.some(
+        creator => creator.creator.email === user.email
+      ) && campaign.status === "active"
     );
 
     // Get recommended campaigns (campaigns not yet participated in)
-    const recommended = allCampaigns.docs.filter(campaign => 
-      campaign.status === 'active' && 
-      !creatorCampaigns.some(myCampaign => myCampaign.id === campaign.id)
+    const recommended = allCampaigns.docs.filter(campaign =>
+      campaign.status === 'active' && (campaign.campaignCreatorsAndBudget?.limitParticipatingCreator?.state ? campaign.campaignCreatorsAndBudget?.limitParticipatingCreator?.creators.some(
+        c => c.email === user.email
+      ) : true) && !creatorCampaigns.some(c => c.id === campaign.id)
     );
 
     // Calculate stats
@@ -47,11 +50,11 @@ const CreatorHome = ({ navigation }) => {
       return total + (myParticipation?.earnings || 0);
     }, 0);
 
-    const activeCampaigns = creatorCampaigns.filter(campaign => campaign.status === 'active').length;
+    const activeCampaigns = creatorCampaigns.filter(campaign => campaign.status === 'active' && campaign.evolution.participatingCreators.find(c => c.creator.email === user.email).participation.status === 'active').length;
     const completedCampaigns = creatorCampaigns.filter(campaign => campaign.status === 'completed').length;
-    const pendingSubmissions = creatorCampaigns.filter(campaign => 
-      campaign.status === 'active' && 
-      !campaign.evolution?.participantsVideos?.some(video => video.creatorEmail === user.email)
+    const pendingSubmissions = creatorCampaigns.filter(campaign =>
+      campaign.status === 'active' &&
+      campaign.evolution.participatingCreators.find(c => c.creator.email === user.email).participation.status === 'review'
     ).length;
 
     setMyCampaigns(creatorCampaigns);
@@ -83,7 +86,7 @@ const CreatorHome = ({ navigation }) => {
   const getCreatorSummary = () => {
     const followerCount = user?.tiktokUser?.stats?.followerCount || 0;
     const formattedFollowers = followerCount > 1000 ? `${Math.floor(followerCount / 1000)}k` : followerCount;
-    
+
     return `${formattedFollowers} abonnés • ${stats.activeCampaigns} campagne${stats.activeCampaigns > 1 ? 's' : ''} active${stats.activeCampaigns > 1 ? 's' : ''} • ${stats.totalEarnings} FCFA gagnés`;
   };
 
@@ -94,13 +97,24 @@ const CreatorHome = ({ navigation }) => {
       `Voulez-vous postuler à la campagne "${campaign.campaignInfo.title}" ?`,
       [
         { text: 'Annuler', style: 'cancel' },
-        { 
-          text: 'Postuler', 
-          onPress: () => {
-            navigation.navigate('CampaignHub', {
-              mode: 'apply',
-              campaignId: campaign.id
-            });
+        {
+          text: 'Postuler',
+          onPress: async () => {
+            let appliedCampaign = { ...campaign }
+            appliedCampaign.evolution.participatingCreators.push({
+              creator: {
+                email: user.email,
+                username: user.username,
+              },
+              participation: {
+                status: "review",
+                postulatedDate: Date.now(),
+                postulationAcceptanceDate: null
+              },
+              videos: []
+            })
+            await UpdateCampaign(appliedCampaign)
+            Alert.alert('Félicitation🎉', 'Vous avez postuler à cette campagne, maintenat veillez patienter la validation de votre candidature')
           }
         }
       ]
@@ -111,6 +125,14 @@ const CreatorHome = ({ navigation }) => {
   const viewCampaign = (campaign) => {
     navigation.navigate('CampaignHub', {
       mode: 'view',
+      campaignId: campaign.id
+    });
+  };
+
+  // View campaign details
+  const viewCampaignStats = (campaign) => {
+    navigation.navigate('CampaignHub', {
+      mode: 'stats',
       campaignId: campaign.id
     });
   };
@@ -127,14 +149,14 @@ const CreatorHome = ({ navigation }) => {
   const renderRecommendedCampaign = ({ item }) => (
     <TouchableOpacity
       style={styles.recommendedCard}
-      onPress={() => applyToCampaign(item)}
+      onPress={() => viewCampaign(item)}
     >
-              <Image
-          source={{ 
-            uri: `http://192.168.1.139:3001/api/campaigndocs/${item.id}/${item.campaignInfo.image}` 
-          }}
-          style={styles.campaignImage}
-        />
+      <Image
+        source={{
+          uri: `${baseUrl}/api/campaigndocs/${item.id}/${item.campaignInfo.image}`
+        }}
+        style={styles.campaignImage}
+      />
       <View style={styles.campaignInfo}>
         <Text style={styles.campaignTitle} numberOfLines={2}>
           {item.campaignInfo.title}
@@ -151,29 +173,35 @@ const CreatorHome = ({ navigation }) => {
           </Text>
         </View>
       </View>
+      <View style={{flexDirection  :'row', marginTop : 10}}>
       <TouchableOpacity
         style={styles.applyButton}
         onPress={() => applyToCampaign(item)}
       >
         <Ionicons name="add-circle" size={24} color="#FF0050" />
+        <Text style={{color : '#FF0050',}}>Participer</Text>
       </TouchableOpacity>
+      </View>
+
     </TouchableOpacity>
   );
 
   // Render my campaign card
   const renderMyCampaign = ({ item }) => {
-    const hasSubmittedVideo = item.evolution?.participantsVideos?.some(
-      video => video.creatorEmail === user.email
-    );
-    
+
+    const LimitOfVideo = item.campaignCreatorsAndBudget.limitContentPerCreator.state ? item.campaignCreatorsAndBudget.limitContentPerCreator.max + "" : '∞';
+    const userParticipation = item.evolution.participatingCreators.find(c => c.creator.email === user.email)
+    const submitedVideos = userParticipation.videos || []
+    const canSubmit = submitedVideos.filter(sv => sv.status == "active").length < (parseInt(LimitOfVideo) || 999999999999999)
+
     return (
       <TouchableOpacity
         style={styles.myCampaignCard}
         onPress={() => viewCampaign(item)}
       >
         <Image
-          source={{ 
-            uri: `http://192.168.1.139:3001/api/campaigndocs/${item.id}/${item.campaignInfo.image}` 
+          source={{
+            uri: `${baseUrl}/api/campaigndocs/${item.id}/${item.campaignInfo.image}`
           }}
           style={styles.campaignImage}
         />
@@ -184,15 +212,20 @@ const CreatorHome = ({ navigation }) => {
           <View style={styles.campaignStatus}>
             <View style={[
               styles.statusBadge,
-              { backgroundColor: item.status === 'active' ? '#00F2EA' : '#FFC107' }
+              { backgroundColor: userParticipation.participation.status === 'active' ? '#00F2EA' : '#d29d01ff' }
             ]}>
               <Text style={styles.statusText}>
-                {item.status === 'active' ? 'Active' : 'En attente'}
+                {userParticipation.participation.status === 'active' ? 'Participation Validé' : 'Participation En attente de validation'}
               </Text>
             </View>
-            {hasSubmittedVideo && (
+            {submitedVideos && submitedVideos.find(sv => sv.status == "active") && (
               <View style={[styles.statusBadge, { backgroundColor: '#25D366' }]}>
-                <Text style={styles.statusText}>Vidéo soumise</Text>
+                <Text style={styles.statusText}>Vidéo validé ({submitedVideos.filter(sv => sv.status == "active").length})</Text>
+              </View>
+            )}
+            {submitedVideos && submitedVideos.find(sv => sv.status == "review") && (
+              <View style={[styles.statusBadge, { backgroundColor: '#d29d01ff' }]}>
+                <Text style={styles.statusText}>Video en cour de validation ({submitedVideos.filter(sv => sv.status == "review").length})</Text>
               </View>
             )}
           </View>
@@ -200,16 +233,22 @@ const CreatorHome = ({ navigation }) => {
             {item.campaignCreatorsAndBudget?.totalBudget} FCFA
           </Text>
         </View>
-        <View style={styles.campaignActions}>
-          {!hasSubmittedVideo && item.status === 'active' && (
+        <View style={[styles.campaignActions]}>
+          {item.status === 'active' && (
             <TouchableOpacity
-              style={styles.submitButton}
-              onPress={() => submitVideo(item)}
+              style={[styles.submitButton, userParticipation.participation.status !== 'active' || !canSubmit ? { opacity: 0.3 } : {}]}
+              onPress={() => !canSubmit ? Alert.alert('Limit atteint', 'vous avez atteint la limite du nombre de vidéo pouvant être soumis') : userParticipation.participation.status === 'active' ? submitVideo(item) : Alert.alert('Veillez patienter', 'Votre participation à cette campagne est en cours d\'examen')}
             >
               <Ionicons name="videocam" size={20} color="#FF0050" />
-              <Text style={styles.submitButtonText}>Soumettre</Text>
+              <Text style={styles.submitButtonText}>Soumettre {submitedVideos && submitedVideos.length > 0 && ("(" + submitedVideos.length + "/" + LimitOfVideo + ")")} </Text>
             </TouchableOpacity>
           )}
+          <TouchableOpacity
+            style={styles.viewButton}
+            onPress={() => viewCampaignStats(item)}
+          >
+            <Ionicons name="bar-chart" size={20} color="#666" />
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.viewButton}
             onPress={() => viewCampaign(item)}
@@ -243,51 +282,20 @@ const CreatorHome = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Enhanced Header */}
-      <View style={[styles.header, { borderBottomLeftRadius: 35, borderBottomRightRadius: 35, overflow: "hidden" }]}>
-        <ImageBackground source={heroImage} style={{ padding: 20, paddingVertical: 60 }}>
-          <View style={styles.headerContent}>
-            <View style={styles.welcomeSection}>
-              <Text style={styles.subHeader}>
-                Bonjour,
-              </Text>
-              <Text style={styles.welcomeText}>
-                {getCreatorDisplayName()}
-              </Text>
-              <Text style={styles.creatorSummary}>
-                {getCreatorSummary()}
-              </Text>
-            </View>
-            
-            <View style={styles.headerActions}>
-              <TouchableOpacity 
-                onPress={logout} 
-                style={styles.logoutButton}
-              >
-                <Ionicons name="log-out-outline" size={20} color="#FF0050" />
-                <Text style={styles.logoutText}>Déconnexion</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </ImageBackground>
-      </View>
 
-      <View style={{ paddingHorizontal: 20 }}>
-        {/* Quick Stats */}
-        <View style={styles.statsSection}>
-          <Text style={styles.sectionTitle}>Vos statistiques</Text>
-          <View style={styles.statsGrid}>
-            {renderStatsCard('wallet', 'Gains totaux', `${stats.totalEarnings} FCFA`, '#25D366')}
-            {renderStatsCard('trending-up', 'Campagnes actives', stats.activeCampaigns, '#00F2EA')}
-            {renderStatsCard('checkmark-circle', 'Terminées', stats.completedCampaigns, '#FFC107')}
-            {renderStatsCard('time', 'En attente', stats.pendingSubmissions, '#FF0050')}
-          </View>
-        </View>
+      {/* Quick Actions */}
+      <View style={styles.quickActions}>
+        <View style={styles.actionGrid}>
 
-        {/* Quick Actions */}
-        <View style={styles.quickActions}>
-          <Text style={styles.sectionTitle}>Actions rapides</Text>
-          <View style={styles.actionGrid}>
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => navigation.navigate('Profile')}
+          >
+            <View style={styles.actionIconContainer}>
+              <Ionicons name="person-circle" size={24} color="#FF0050" />
+            </View>
+          </TouchableOpacity>
+          <View style={{ flexDirection: "row" }}>
             <TouchableOpacity
               style={styles.actionCard}
               onPress={() => navigation.navigate('BrowseCampaigns')}
@@ -295,36 +303,6 @@ const CreatorHome = ({ navigation }) => {
               <View style={styles.actionIconContainer}>
                 <Ionicons name="search" size={24} color="#FF0050" />
               </View>
-              <Text style={styles.actionText}>Parcourir</Text>
-              <Text style={styles.actionSubtext}>
-                {recommendedCampaigns.length} campagnes
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.actionCard}
-              onPress={() => navigation.navigate('Dashboard')}
-            >
-              <View style={styles.actionIconContainer}>
-                <Ionicons name="videocam" size={24} color="#FF0050" />
-              </View>
-              <Text style={styles.actionText}>Mes Vidéos</Text>
-              <Text style={styles.actionSubtext}>
-                {myCampaigns.filter(c => c.evolution?.participantsVideos?.some(v => v.creatorEmail === user.email)).length} soumises
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.actionCard}
-              onPress={() => navigation.navigate('Profile')}
-            >
-              <View style={styles.actionIconContainer}>
-                <Ionicons name="person-circle" size={24} color="#FF0050" />
-              </View>
-              <Text style={styles.actionText}>Mon Profil</Text>
-              <Text style={styles.actionSubtext}>
-                {user?.tiktokUser?.stats?.followerCount || 0} abonnés
-              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -334,9 +312,30 @@ const CreatorHome = ({ navigation }) => {
               <View style={styles.actionIconContainer}>
                 <Ionicons name="notifications" size={24} color="#FF0050" />
               </View>
-              <Text style={styles.actionText}>Notifications</Text>
-              <Text style={styles.actionSubtext}>Voir les alertes</Text>
             </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+
+      {/* Enhanced Header */}
+      <View style={[styles.header, { overflow: "hidden" }]}>
+        <View style={{ padding: 20, paddingVertical: 0 }}>
+          <Text style={styles.subHeader}>
+            Bonjour,
+            <Text style={styles.welcomeText}>
+              {" " + getCreatorDisplayName().toUpperCase()}
+            </Text>
+          </Text>
+        </View>
+      </View>
+
+      <View style={{ paddingHorizontal: 20, marginBottom : 20 }}>
+        {/* Quick Stats */}
+        <View style={styles.statsSection}>
+          <View style={styles.statsGrid}>
+            {renderStatsCard('wallet', 'Gains totaux', `${stats.totalEarnings} FCFA`, '#25D366')}
+            {renderStatsCard('trending-up', 'Campagnes actives', stats.activeCampaigns, '#00F2EA')}
+            {renderStatsCard('time', 'En attente', stats.pendingSubmissions, '#FF0050')}
           </View>
         </View>
 
@@ -348,14 +347,14 @@ const CreatorHome = ({ navigation }) => {
               <Text style={styles.seeAllText}>Voir tout</Text>
             </TouchableOpacity>
           </View>
-          
+
           {myCampaigns.length === 0 ? (
             <View style={styles.emptyContainer}>
               <Ionicons name="videocam-outline" size={48} color="#666" />
               <Text style={styles.emptyText}>
                 Vous n'avez pas encore participé à des campagnes
               </Text>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.browseButton}
                 onPress={() => navigation.navigate('BrowseCampaigns')}
               >
@@ -364,7 +363,7 @@ const CreatorHome = ({ navigation }) => {
             </View>
           ) : (
             <FlatList
-              data={myCampaigns.slice(0, 3)}
+              data={myCampaigns.sort((c1, c2) => c1.evolution.participatingCreators.find(c => c.creator.email === user.email).participation.status === 'active' && c2.evolution.participatingCreators.find(c => c.creator.email === user.email).participation.status !== 'active' ? -1 : 1)}
               keyExtractor={(item) => item.id}
               renderItem={renderMyCampaign}
               horizontal
@@ -382,7 +381,7 @@ const CreatorHome = ({ navigation }) => {
               <Text style={styles.seeAllText}>Voir tout</Text>
             </TouchableOpacity>
           </View>
-          
+
           {recommendedCampaigns.length === 0 ? (
             <View style={styles.emptyContainer}>
               <Ionicons name="trending-up-outline" size={48} color="#666" />
@@ -402,6 +401,14 @@ const CreatorHome = ({ navigation }) => {
           )}
         </View>
       </View>
+      <Modal
+        visible={isLoading}
+        transparent
+        style={{ flex: 1, justifyContent: 'center', alignContent: "center" }}
+      >
+        <ActivityIndicator size={'large'} />
+
+      </Modal>
     </ScrollView>
   );
 };
@@ -412,9 +419,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#121212',
     padding: 0,
+    maxHeight : height
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 10,
     paddingTop: 0,
   },
   headerContent: {
@@ -426,16 +434,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   welcomeText: {
-    fontSize: 28,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
-    marginBottom: 8,
   },
   creatorSummary: {
     fontSize: 14,
     color: '#ccc',
     lineHeight: 20,
-    maxWidth: '80%',
   },
   headerActions: {
     alignItems: 'flex-end',
@@ -459,7 +465,6 @@ const styles = StyleSheet.create({
   subHeader: {
     fontSize: 16,
     color: '#aaa',
-    marginBottom: 4,
   },
   loadingContainer: {
     flex: 1,
@@ -473,7 +478,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   statsSection: {
-    marginBottom: 25,
+    marginBottom: 10,
   },
   statsGrid: {
     flexDirection: 'row',
@@ -486,7 +491,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 20,
     alignItems: 'center',
-    width: '48%',
+    width: '32%',
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#333',
@@ -501,33 +506,28 @@ const styles = StyleSheet.create({
   },
   statsValue: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 4,
   },
   statsTitle: {
     color: '#999',
-    fontSize: 12,
+    fontSize: 11,
     textAlign: 'center',
   },
   quickActions: {
-    marginBottom: 25,
+    marginBottom: 15,
   },
   actionGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginTop: 15,
+    marginTop: 40,
+    paddingHorizontal: 15
   },
   actionCard: {
-    backgroundColor: '#222',
-    borderRadius: 15,
-    padding: 20,
     alignItems: 'center',
-    width: '48%',
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: '#333',
+    marginHorizontal: 5,
   },
   actionIconContainer: {
     width: 50,
@@ -536,18 +536,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 0, 80, 0.1)',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 5,
   },
   actionText: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 4,
   },
   actionSubtext: {
     color: '#999',
-    fontSize: 12,
+    fontSize: 11,
     textAlign: 'center',
   },
   myCampaignsSection: {
@@ -650,6 +650,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     borderWidth: 1,
+    marginHorizontal: 10,
     borderColor: '#FF0050',
   },
   submitButtonText: {
@@ -662,16 +663,16 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 20,
     backgroundColor: '#333',
+    marginRight: 10
   },
   applyButton: {
-    position: 'absolute',
-    top: 15,
-    right: 15,
     backgroundColor: 'rgba(255, 0, 80, 0.1)',
     borderRadius: 20,
     padding: 8,
     borderWidth: 1,
     borderColor: '#FF0050',
+    flexDirection : 'row',
+    alignItems : "center"
   },
   emptyContainer: {
     alignItems: 'center',

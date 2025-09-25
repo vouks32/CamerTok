@@ -1,0 +1,1067 @@
+{
+  "id": "campaign-jotsaange@gmail.com-1754914878677",
+  "campaignOwner": "jotsaange@gmail.com",
+  "campaignInfo": {
+    "title": "3 - ne privez jamais quelqu'un d'espoir, c'est ",
+    "image": "Cover-jotsaange_gmail.com-1754914871614.jpeg",
+    "description": "ne privez jamais quelqu'un d'espoir, c'est peut-être tout ce qui lui reste. Yo yoy yo",
+    "startDate": 1754953200000,
+    "endDate": 1755644400000,
+    "documents": [
+      {
+        "name": "Cover-jotsaange_gmail.com-1754914871614.jpeg",
+        "serverName": "Cover-jotsaange_gmail.com-1754914871614.jpeg"
+      },
+      {
+        "name": "InVideo-jotsaange_gmail.com-1754914846620.mp4",
+        "size": 4807998,
+        "mimeType": "video/mp4",
+        "serverName": "InVideo-jotsaange_gmail.com-1754914846620.mp4"
+      },
+      {
+        "name": "Documents-0-jotsaange_gmail.com-1754914859570.pdf",
+        "size": 218434,
+        "mimeType": "application/pdf",
+        "serverName": "Documents-0-jotsaange_gmail.com-1754914859570.pdf"
+      }
+    ]
+  },
+  "campaignCreatorsAndBudget": {
+    "totalBudget": "30000",
+    "limitBudgetPerCreator": {
+      "state": false,
+      "min": 1,
+      "max": ""
+    },
+    "limitContentPerCreator": {
+      "state": false,
+      "min": 1,
+      "max": 5
+    },
+    "limitParticipatingCreator": {
+      "state": true,
+      "creators": [
+        {
+          "userType": "creator",
+          "email": "user01@gmail.com",
+          "phone": "676073559",
+          "password": "1234",
+          "username": "vouks.san2",
+          "tiktokUser": {
+            "user": {
+              "uid": "7090270909333013509",
+              "username": "vouks.san2",
+              "nickname": "Dr. Vouks2",
+              "avatarLarger": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=d80c1bd1&x-expires=1754380800&x-signature=KPJkp2LQ1IUEr1VNC7nc9AWnHOY%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "avatarThumb": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:100:100.jpeg?dr=14579&refresh_token=272eefaa&x-expires=1754380800&x-signature=Y7fWgZ9r0fd4YBtRmDp46%2FRc8%2FI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "avatarMedium": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:720:720.jpeg?dr=14579&refresh_token=180ba3a4&x-expires=1754380800&x-signature=WzZ6OQ%2FJUT2jy0yyLF7i8k3MnqI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "signature": "『gV』\nje s'appelle vouks\npour collaboration 🫵👇\npeanutsxonr@gmail.com",
+              "verified": false,
+              "privateAccount": false,
+              "commerceUser": false,
+              "usernameModifyTime": 0,
+              "nicknameModifyTime": 1746563508,
+              "secUid": "MS4wLjABAAAAQZzjGLPdTiEgtD1TSY3FXPbSsAvYzWyyzkkZgFd_7E1oqnJNa46XeTe-FH89bfEH"
+            },
+            "stats": {
+              "followerCount": 12500,
+              "followingCount": 350,
+              "heartCount": 1150000,
+              "videoCount": 153,
+              "likeCount": 19500,
+              "friendCount": 128
+            }
+          },
+          "companyName": "",
+          "createdAt": "2025-08-03T08:47:06.498Z",
+          "lastLogin": "2025-08-03T08:47:06.498Z",
+          "isFirstTime": true,
+          "campaigns": [],
+          "lastUpdated": 1754210825759,
+          "id": "user01@gmail.com"
+        },
+        {
+          "userType": "creator",
+          "email": "jotsaange@gmail.com",
+          "phone": "676073559",
+          "password": "1234",
+          "username": "vouks.san",
+          "tiktokUser": {
+            "user": {
+              "uid": "7090270909333013509",
+              "username": "vouks.san",
+              "nickname": "Dr. Vouks",
+              "avatarLarger": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=d80c1bd1&x-expires=1754380800&x-signature=KPJkp2LQ1IUEr1VNC7nc9AWnHOY%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "avatarThumb": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:100:100.jpeg?dr=14579&refresh_token=272eefaa&x-expires=1754380800&x-signature=Y7fWgZ9r0fd4YBtRmDp46%2FRc8%2FI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "avatarMedium": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:720:720.jpeg?dr=14579&refresh_token=180ba3a4&x-expires=1754380800&x-signature=WzZ6OQ%2FJUT2jy0yyLF7i8k3MnqI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "signature": "『gV』\nje s'appelle vouks\npour collaboration 🫵👇\npeanutsxonr@gmail.com",
+              "verified": false,
+              "privateAccount": false,
+              "commerceUser": false,
+              "usernameModifyTime": 0,
+              "nicknameModifyTime": 1746563508,
+              "secUid": "MS4wLjABAAAAQZzjGLPdTiEgtD1TSY3FXPbSsAvYzWyyzkkZgFd_7E1oqnJNa46XeTe-FH89bfEH"
+            },
+            "stats": {
+              "followerCount": 31500,
+              "followingCount": 350,
+              "heartCount": 1200000,
+              "videoCount": 153,
+              "likeCount": 19500,
+              "friendCount": 128
+            }
+          },
+          "companyName": "",
+          "createdAt": "2025-08-03T08:47:06.498Z",
+          "lastLogin": "2025-08-03T08:47:06.498Z",
+          "isFirstTime": true,
+          "campaigns": [],
+          "lastUpdated": 1754210825759,
+          "id": "jotsaange@gmail.com"
+        },
+        {
+          "userType": "creator",
+          "email": "user04@gmail.com",
+          "phone": "676073559",
+          "password": "1234",
+          "username": "vouks.rt",
+          "tiktokUser": {
+            "user": {
+              "uid": "7090270909333013509",
+              "username": "vouks.rt",
+              "nickname": "Dr. ggrrr",
+              "avatarLarger": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=d80c1bd1&x-expires=1754380800&x-signature=KPJkp2LQ1IUEr1VNC7nc9AWnHOY%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "avatarThumb": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:100:100.jpeg?dr=14579&refresh_token=272eefaa&x-expires=1754380800&x-signature=Y7fWgZ9r0fd4YBtRmDp46%2FRc8%2FI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "avatarMedium": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:720:720.jpeg?dr=14579&refresh_token=180ba3a4&x-expires=1754380800&x-signature=WzZ6OQ%2FJUT2jy0yyLF7i8k3MnqI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "signature": "『gV』\nje s'appelle vouks\npour collaboration 🫵👇\npeanutsxonr@gmail.com",
+              "verified": false,
+              "privateAccount": false,
+              "commerceUser": false,
+              "usernameModifyTime": 0,
+              "nicknameModifyTime": 1746563508,
+              "secUid": "MS4wLjABAAAAQZzjGLPdTiEgtD1TSY3FXPbSsAvYzWyyzkkZgFd_7E1oqnJNa46XeTe-FH89bfEH"
+            },
+            "stats": {
+              "followerCount": 78500,
+              "followingCount": 350,
+              "heartCount": 900000,
+              "videoCount": 153,
+              "likeCount": 19500,
+              "friendCount": 128
+            }
+          },
+          "companyName": "",
+          "createdAt": "2025-08-03T08:47:06.498Z",
+          "lastLogin": "2025-08-03T08:47:06.498Z",
+          "isFirstTime": true,
+          "campaigns": [],
+          "lastUpdated": 1754210825759,
+          "id": "user04@gmail.com"
+        },
+        {
+          "userType": "creator",
+          "email": "jotsaange@gmail.com",
+          "phone": "676073559",
+          "password": "1234",
+          "username": "vouks.bt",
+          "tiktokUser": {
+            "user": {
+              "uid": "7090270909333013509",
+              "username": "vouks.bt",
+              "nickname": "Dr. Vook",
+              "avatarLarger": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=d80c1bd1&x-expires=1754380800&x-signature=KPJkp2LQ1IUEr1VNC7nc9AWnHOY%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "avatarThumb": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:100:100.jpeg?dr=14579&refresh_token=272eefaa&x-expires=1754380800&x-signature=Y7fWgZ9r0fd4YBtRmDp46%2FRc8%2FI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "avatarMedium": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f5668771f11f90fcd81a51d28145e22e~tplv-tiktokx-cropcenter:720:720.jpeg?dr=14579&refresh_token=180ba3a4&x-expires=1754380800&x-signature=WzZ6OQ%2FJUT2jy0yyLF7i8k3MnqI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+              "signature": "『gV』\nje s'appelle vouks\npour collaboration 🫵👇\npeanutsxonr@gmail.com",
+              "verified": false,
+              "privateAccount": false,
+              "commerceUser": false,
+              "usernameModifyTime": 0,
+              "nicknameModifyTime": 1746563508,
+              "secUid": "MS4wLjABAAAAQZzjGLPdTiEgtD1TSY3FXPbSsAvYzWyyzkkZgFd_7E1oqnJNa46XeTe-FH89bfEH"
+            },
+            "stats": {
+              "followerCount": 11500,
+              "followingCount": 350,
+              "heartCount": 1200000,
+              "videoCount": 153,
+              "likeCount": 19500,
+              "friendCount": 128
+            }
+          },
+          "companyName": "",
+          "createdAt": "2025-08-03T08:47:06.498Z",
+          "lastLogin": "2025-08-03T08:47:06.498Z",
+          "isFirstTime": true,
+          "campaigns": [],
+          "lastUpdated": 1754210825759,
+          "id": "user03@gmail.com"
+        }
+      ]
+    }
+  },
+  "campaignType": {
+    "captionCampaign": {
+      "state": false,
+      "caption": ""
+    },
+    "textInContentCampaign": {
+      "state": false,
+      "text": ""
+    },
+    "VideoInContentCampaign": {
+      "state": true,
+      "video": {
+        "mimeType": "video/mp4",
+        "uri": "file:///data/user/0/host.exp.exponent/cache/DocumentPicker/98a0f411-428f-4759-af14-83a450f54119.mp4",
+        "name": "b98947e1c7bcaf576abac740c7839f3a.mp4",
+        "size": 4807998,
+        "serverName": "InVideo-jotsaange_gmail.com-1754914846620.mp4"
+      },
+      "videoPosition": "creator-choice",
+      "shouldSpeakOver": false,
+      "speakOverScript": ""
+    },
+    "fullPresentationCampaign": {
+      "state": true,
+      "documents": [
+        {
+          "name": "Documents-0-jotsaange_gmail.com-1754914859570.pdf",
+          "size": 218434,
+          "mimeType": "application/pdf",
+          "serverName": "Documents-0-jotsaange_gmail.com-1754914859570.pdf"
+        }
+      ],
+      "description": "ne privez jamais quelqu'un d'espoir, c'est peut-être tout ce qui lui reste"
+    }
+  },
+  "evolution": {
+    "participatingCreators": [
+      {
+        "creator": {
+          "email": "jotsaange@gmail.com",
+          "username": "vouks.san"
+        },
+        "participation": {
+          "status": "active",
+          "postulatedDate": 1756704170465,
+          "postulationAcceptanceDate": null
+        },
+        "videos": [
+          {
+            "id": "7544465131711859974",
+            "share_count": 500,
+            "view_count": 30798,
+            "comment_count": 99,
+            "create_time": 1756582681,
+            "embed_link": "https://www.tiktok.com/player/v1/7544465131711859974?music_info=1&description=1&autoplay=1&loop=1&utm_campaign=tt4d_open_api&utm_source=sbawichfdxmm1wsd4z",
+            "title": "qu'est-ce que tu choisis? @TECNO Mobile  #tiktokfranceI #camerountiktok@ #fypageシ  #ambassadeurTECNO #SPARK40",
+            "video_description": "qu'est-ce que tu choisis? @TECNO Mobile  #tiktokfranceI #camerountiktok@ #fypageシ  #ambassadeurTECNO #SPARK40",
+            "cover_image_url": "https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/o8ERX6IzgCbfzwDnBQfHFTAJA6Euwu6bB0soUE~tplv-tiktokx-cropcenter-q:300:400:q72.jpeg?dr=14782&refresh_token=a1c67aaf&x-expires=1757066400&x-signature=DVofEmRoqAuyFxaoDZAOL4HVV60%3D&t=bacd0480&ps=933b5bde&shp=d05b14bd&shcp=8aecc5ac&idc=maliva&s=TIKTOK_FOR_DEVELOPER&sc=cover&biz_tag=tt_video",
+            "duration": 50,
+            "like_count": 3798,
+            "status": "rejected",
+            "rejectReason": "trop courte"
+          },
+          {
+            "comment_count": 139,
+            "duration": 55,
+            "like_count": 4102,
+            "view_count": 26105,
+            "title": "tu choisis qui👁👄👁?  @TECNO Mobile  #tiktokfranceI #camerountiktok@ #fypage> #ambassadeurTECNO #SPARK40",
+            "video_description": "tu choisis qui👁👄👁?  @TECNO Mobile  #tiktokfranceI #camerountiktok@ #fypage> #ambassadeurTECNO #SPARK40",
+            "cover_image_url": "https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/oQIdeLggSfALsIVurgjJPaeAVnGbCCjgSJPRhS~tplv-tiktokx-cropcenter-q:300:400:q72.jpeg?dr=14782&refresh_token=cf0da62d&x-expires=1757066400&x-signature=HI%2B3Ggdz43HvVBnCKcsV9kLkWUQ%3D&t=bacd0480&ps=933b5bde&shp=d05b14bd&shcp=8aecc5ac&idc=maliva&s=TIKTOK_FOR_DEVELOPER&sc=cover&biz_tag=tt_video",
+            "create_time": 1756671548,
+            "embed_link": "https://www.tiktok.com/player/v1/7544846825816100101?music_info=1&description=1&autoplay=1&loop=1&utm_campaign=tt4d_open_api&utm_source=sbawichfdxmm1wsd4z",
+            "id": "7544846825816100101",
+            "share_count": 488,
+            "status": "active",
+            "history": [
+              {
+                "views": 26813,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757126773031
+              },
+              {
+                "views": 26813,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757127373861
+              },
+              {
+                "views": 26815,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757127975010
+              },
+              {
+                "views": 26815,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757128574870
+              },
+              {
+                "views": 26815,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757129174858
+              },
+              {
+                "views": 26815,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757129774139
+              },
+              {
+                "views": 26816,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757130374297
+              },
+              {
+                "views": 26817,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757130974518
+              },
+              {
+                "views": 26818,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757131574702
+              },
+              {
+                "views": 26819,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757132175112
+              },
+              {
+                "views": 26819,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757132775187
+              },
+              {
+                "views": 26819,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757133374839
+              },
+              {
+                "views": 26819,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757133974874
+              },
+              {
+                "views": 26819,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757134574317
+              },
+              {
+                "views": 26819,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757135175181
+              },
+              {
+                "views": 26819,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757135774791
+              },
+              {
+                "views": 26820,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757136374580
+              },
+              {
+                "views": 26820,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757136975036
+              },
+              {
+                "views": 26820,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757137574977
+              },
+              {
+                "views": 26820,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757138174517
+              },
+              {
+                "views": 26820,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757138774469
+              },
+              {
+                "views": 26820,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757139375128
+              },
+              {
+                "views": 26820,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757139974910
+              },
+              {
+                "views": 26820,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757140575155
+              },
+              {
+                "views": 26820,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757141174641
+              },
+              {
+                "views": 26821,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757141774638
+              },
+              {
+                "views": 26823,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757142375643
+              },
+              {
+                "views": 26823,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757142974944
+              },
+              {
+                "views": 26824,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757143574566
+              },
+              {
+                "views": 26824,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757144175238
+              },
+              {
+                "views": 26825,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757144775499
+              },
+              {
+                "views": 26826,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757145374965
+              },
+              {
+                "views": 26828,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757145974689
+              },
+              {
+                "views": 26828,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757146574922
+              },
+              {
+                "views": 26828,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757147174548
+              },
+              {
+                "views": 26829,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757147774782
+              },
+              {
+                "views": 26831,
+                "likes": 4199,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757148375739
+              },
+              {
+                "views": 26834,
+                "likes": 4200,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757148974672
+              },
+              {
+                "views": 26836,
+                "likes": 4200,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757149575295
+              },
+              {
+                "views": 26837,
+                "likes": 4200,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757150174944
+              },
+              {
+                "views": 26839,
+                "likes": 4200,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757150774985
+              },
+              {
+                "views": 26845,
+                "likes": 4200,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757151374943
+              },
+              {
+                "views": 26845,
+                "likes": 4200,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757151975434
+              },
+              {
+                "views": 26846,
+                "likes": 4201,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757152574663
+              },
+              {
+                "views": 26847,
+                "likes": 4201,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757153175138
+              },
+              {
+                "views": 26850,
+                "likes": 4201,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757153774830
+              },
+              {
+                "views": 26851,
+                "likes": 4201,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757154374837
+              },
+              {
+                "views": 26853,
+                "likes": 4201,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757154975437
+              },
+              {
+                "views": 26855,
+                "likes": 4202,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757155575552
+              },
+              {
+                "views": 26858,
+                "likes": 4202,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757156175547
+              },
+              {
+                "views": 26861,
+                "likes": 4202,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757156775828
+              },
+              {
+                "views": 26865,
+                "likes": 4202,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757157375060
+              },
+              {
+                "views": 26877,
+                "likes": 4204,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757157975725
+              },
+              {
+                "views": 26880,
+                "likes": 4204,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757158575776
+              },
+              {
+                "views": 26880,
+                "likes": 4204,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757159175923
+              },
+              {
+                "views": 26882,
+                "likes": 4204,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757159775146
+              },
+              {
+                "views": 26883,
+                "likes": 4204,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757160375944
+              },
+              {
+                "views": 26883,
+                "likes": 4204,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757160975220
+              },
+              {
+                "views": 26886,
+                "likes": 4206,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757161575479
+              },
+              {
+                "views": 26892,
+                "likes": 4207,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757162176029
+              },
+              {
+                "views": 26894,
+                "likes": 4207,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757162775480
+              },
+              {
+                "views": 26897,
+                "likes": 4208,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757163375126
+              },
+              {
+                "views": 26900,
+                "likes": 4210,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757163975888
+              },
+              {
+                "views": 26903,
+                "likes": 4210,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757164575360
+              },
+              {
+                "views": 26905,
+                "likes": 4210,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757165175597
+              },
+              {
+                "views": 26906,
+                "likes": 4210,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757165775943
+              },
+              {
+                "views": 26909,
+                "likes": 4211,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757166375497
+              },
+              {
+                "views": 26911,
+                "likes": 4211,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757166975834
+              },
+              {
+                "views": 26912,
+                "likes": 4211,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757167575819
+              },
+              {
+                "views": 26913,
+                "likes": 4211,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757168175930
+              },
+              {
+                "views": 26913,
+                "likes": 4211,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757168775845
+              },
+              {
+                "views": 26916,
+                "likes": 4212,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757169376109
+              },
+              {
+                "views": 26918,
+                "likes": 4212,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757169975960
+              },
+              {
+                "views": 26921,
+                "likes": 4212,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757170575493
+              },
+              {
+                "views": 26924,
+                "likes": 4212,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757171175828
+              },
+              {
+                "views": 26926,
+                "likes": 4214,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757171776061
+              },
+              {
+                "views": 26928,
+                "likes": 4214,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757172376211
+              },
+              {
+                "views": 26930,
+                "likes": 4214,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757172975405
+              },
+              {
+                "views": 26930,
+                "likes": 4214,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757173576399
+              },
+              {
+                "views": 26932,
+                "likes": 4214,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757174175758
+              },
+              {
+                "views": 26932,
+                "likes": 4214,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757174775599
+              },
+              {
+                "views": 26934,
+                "likes": 4215,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757175376295
+              },
+              {
+                "views": 26935,
+                "likes": 4215,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757175975402
+              },
+              {
+                "views": 26935,
+                "likes": 4215,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757176575825
+              },
+              {
+                "views": 26936,
+                "likes": 4216,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757177175541
+              },
+              {
+                "views": 26940,
+                "likes": 4217,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757177775520
+              },
+              {
+                "views": 26944,
+                "likes": 4218,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757178376070
+              },
+              {
+                "views": 26947,
+                "likes": 4218,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757178976123
+              },
+              {
+                "views": 26948,
+                "likes": 4218,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757179575427
+              },
+              {
+                "views": 26950,
+                "likes": 4218,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757180175625
+              },
+              {
+                "views": 26954,
+                "likes": 4219,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757180776213
+              },
+              {
+                "views": 26955,
+                "likes": 4220,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757181376608
+              },
+              {
+                "views": 26959,
+                "likes": 4220,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757181976044
+              },
+              {
+                "views": 26959,
+                "likes": 4220,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757182576604
+              },
+              {
+                "views": 26961,
+                "likes": 4220,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757183175318
+              },
+              {
+                "views": 26962,
+                "likes": 4221,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757183776281
+              },
+              {
+                "views": 26965,
+                "likes": 4222,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757184376510
+              },
+              {
+                "views": 26965,
+                "likes": 4222,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757184976644
+              },
+              {
+                "views": 26969,
+                "likes": 4222,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757185576428
+              },
+              {
+                "views": 26973,
+                "likes": 4222,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757186176653
+              },
+              {
+                "views": 26975,
+                "likes": 4222,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757186776507
+              },
+              {
+                "views": 26976,
+                "likes": 4222,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757187376416
+              },
+              {
+                "views": 26979,
+                "likes": 4223,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757187975965
+              },
+              {
+                "views": 26987,
+                "likes": 4225,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757188576106
+              },
+              {
+                "views": 26989,
+                "likes": 4225,
+                "shares": 496,
+                "comments": 147,
+                "date": 1757189176141
+              },
+              {
+                "views": 26992,
+                "likes": 4225,
+                "shares": 498,
+                "comments": 147,
+                "date": 1757189775878
+              },
+              {
+                "views": 26996,
+                "likes": 4225,
+                "shares": 498,
+                "comments": 147,
+                "date": 1757190375576
+              },
+              {
+                "views": 26998,
+                "likes": 4225,
+                "shares": 498,
+                "comments": 147,
+                "date": 1757190976179
+              },
+              {
+                "views": 27000,
+                "likes": 4225,
+                "shares": 498,
+                "comments": 147,
+                "date": 1757191576074
+              },
+              {
+                "views": 27005,
+                "likes": 4225,
+                "shares": 498,
+                "comments": 147,
+                "date": 1757192174566
+              },
+              {
+                "views": 27372,
+                "likes": 4292,
+                "shares": 505,
+                "comments": 149,
+                "date": 1757346063442
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "participantsVideos": [],
+    "stats": []
+  },
+  "createdAt": 1754915417285,
+  "status": "active"
+}

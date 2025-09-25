@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, FlatList, Alert } from 'react-native';
-import VideoSubmit from '../components/VideoSubmit';
 import CreateCampaign from './CampaignHub/create';
 import ViewCampaign from './CampaignHub/view';
+import VideoSubmit from './CampaignHub/VideoSubmit';
+import CampaignStatsScreen from './CampaignHub/CampaignAnalytics';
 
 const NUM_CAMPAIGN_CREATION_STEPS = 3;
 
@@ -19,22 +20,21 @@ const CampaignHub = ({ route, navigation }) => {
     return <CreateCampaign navigation={navigation} edit={true} campaignId={campaignId} />
   }
 
-  if (mode === 'apply' && campaignData) {
+  if (mode === 'submit' && campaignId) {
     return (
-      <View>
-        <Text style={styles.title}>{campaignData.title}</Text>
-        <Text style={styles.reward}>Reward: {campaignData.reward} FCFA</Text>
-        <Text style={styles.description}>{campaignData.description}</Text>
-        <Text style={styles.requirements}>Requirements: {campaignData.requirements}</Text>
-
-        <VideoSubmit campaignId={campaignData.id} />
-      </View>
+      <VideoSubmit campaignId={campaignId} navigation={navigation}/>
     );
   }
 
   if (mode === 'view') {
     return (
       <ViewCampaign navigation={navigation} campaignId={campaignId} />
+    );
+  }
+
+  if (mode === 'stats') {
+    return (
+      <CampaignStatsScreen navigation={navigation} campaignId={campaignId} />
     );
   }
 

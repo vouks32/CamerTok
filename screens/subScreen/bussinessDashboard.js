@@ -71,7 +71,7 @@ const BussinessDashboard = ({ route, navigation }) => {
 
     useEffect(() => {
         // Replace with API call to fetch campaigns
-        setCampaigns(allCampaigns ? allCampaigns.docs.filter(d => !d.deleted) : []);
+        setCampaigns(allCampaigns ? allCampaigns.docs.filter(d => !d.deleted && d.campaignOwner === user.email) : []);
         //console.log(user)
     }, [allCampaigns]);
 
@@ -102,7 +102,7 @@ const BussinessDashboard = ({ route, navigation }) => {
                         renderItem={({ item }) => (
                             <View>
                                 <CampaignCard
-                                    campaign={item}
+                                    campaignID={item.id}
                                     userType={user?.userType}
                                     navigation={navigation}
                                 />
@@ -131,7 +131,7 @@ const BussinessDashboard = ({ route, navigation }) => {
                         renderItem={({ item }) => (
                             <View>
                                 <CampaignCard
-                                    campaign={item}
+                                    campaignID={item.id}
                                     userType={user?.userType}
                                     navigation={navigation}
                                 />

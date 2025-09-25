@@ -1,68 +1,82 @@
-import React, { useEffect, useState } from 'react';
-import { View, Button } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
-import * as AuthSession from 'expo-auth-session';
-import axios from 'axios';
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, Button, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import { useAuth } from '../context/AuthContext';
 import * as Linking from 'expo-linking';
+import { useFocusEffect, useNavigationState } from '@react-navigation/native';
 
-const openInSystemBrowser = async (url) => {
-  // Check if the device supports opening the URL
-  const supported = await Linking.canOpenURL(url);
 
-  if (supported) {
-    // Open the link in default system browser
-    await Linking.openURL(url);
-  } else {
-    console.error(`Don't know how to open this URL: ${url}`);
+export default function TikTokAuth({ navigation }) {
+  const { user, reloadUser, baseUrl } = useAuth()
+  const [showText, setShowText] = useState(false)
+  const [showButton, setShowButton] = useState(true)
+  const REDIRECT_URI = baseUrl + '/api/auth?email=' //J'utilise vercel pour valider tiktok parceque AWS n'offre pas de https
+  const promptAsync = async () => {
+    await Linking.openURL(REDIRECT_URI + user.email);
   }
-};
+  let routName = useNavigationState(state => {
+    return state.routes[state.index].name
+  })
 
-
-export default function TikTokAuth({ onLogin, navigation }) {
-  const { user } = useAuth()
-  const REDIRECT_URI = 'https://campay-api.vercel.app/api/auth?email=' //J'utilise vercel pour valider tiktok parceque AWS n'offre pas de https
-
-  const promptAsync = () => {
-    openInSystemBrowser(REDIRECT_URI + user.email);
-  }
-  
-  const handleDeepLink = async (event) => {
-    // Parse redirect URL
-    const url = Linking.parse(event.url);
-    
-    if (url.path === 'TiktokLogin') {
-      const { code, state } = url.queryParams;
-      
-      if (!code) {
-        Alert.alert('Error', 'Authorization failed: No code returned');
-        return;
+  useEffect(
+    () => {
+      if (user && user.userType !== "creator") {
+        navigation.navigate('Home')
+        return
       }
 
-      try {
-        // Exchange code for token
-        
-      } catch (error) {
-        console.error('Token exchange error:', error);
-        Alert.alert('Error', 'Failed to authenticate');
+      let timer = null
+
+      const check = async (first = false) => {
+        console.log('checking Tiktok')
+        let _user = first ? user : (await reloadUser())
+        if (_user?.tiktokToken) {
+          if (_user?.tiktokToken.date + _user?.tiktokToken.expires_in < (Date.now() / 1000)) {
+            try {
+              const resp = await fetch('https://campay-api.vercel.app/api/refresh_token?email=' + _user.email + '&refresh_token=' + _user?.tiktokToken.refresh_token)
+            } catch (error) {
+              console.log('error reloading token')
+            }
+          }
+
+          setTimeout(() => navigation.navigate('Home'), 500)
+          if (timer) clearInterval(timer)
+        } else if (first) {
+          setShowText(true)
+        }
       }
-    }
-  };
 
-  useEffect(() => {
-    // Add deep link listener
-    const sub = Linking.addEventListener('url', handleDeepLink);
+      timer = setInterval(check, 3000)
 
-    // Clean up listener
-    return () => sub.remove()
-  }, []);
+      check(true)
+    }, [])
+
 
   return (
-    <View>
-      <Button
-        title="Login with TikTok"
-        onPress={() => promptAsync()}
-      />
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ActivityIndicator size={"large"} />
+
+      {
+        showText && (
+          <>
+            <Text style={{ color: "black", marginVertical: 10, fontSize: 18, fontWeight: "bold" }}>Connectez votre compte tiktok</Text>
+            <Text style={{ color: "black", marginVertical: 10 }}>Veillez patienter quelques secondes, si votre compte tiktok n'est pas automatiquement lié, cliquez sur le bouton si dessous</Text>
+
+            <TouchableOpacity disabled={!showButton} onPress={async () => {
+              setShowButton(false)
+              await promptAsync()
+            }} style={{ padding: 20, backgroundColor: "#ff2020", borderRadius: 10, margin: 10 }}>
+              {
+                showButton ? (
+                  <Text style={{ color: "white" }}>Connectez votre compte tiktok</Text>
+                ) : (
+                  <ActivityIndicator size={"small"} />
+                )
+              }
+            </TouchableOpacity>
+
+          </>
+        )
+      }
     </View>
   );
 }
